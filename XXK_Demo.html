@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XXK</title>
+    <style type="text/css">
+        .tab-panel{
+            display: none;
+        }
+        .tab-panel.active{
+            display: block;
+        }
+        #tab-1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        #tab-2{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+        #tab-3{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<ul class="tab-list">
+    <li id="li1" class="active"><a class="tab-control" href="#tab-1">a</a></li>
+    <li id="li2"><a class="tab-control" href="#tab-2">b</a></li>
+    <li id="li3"><a class="tab-control" href="#tab-3">c</a></li>
+</ul>
+<div>
+<div class="tab-panel active" id="tab-1"></div>
+<div class="tab-panel" id="tab-2"></div>
+<div class="tab-panel" id="tab-3"></div>
+</div>
+
+<script type="text/javascript" src="jquery-3.2.0.min.js"></script>
+<script type="text/javascript">
+//    $('.tab-list').each(function () {
+//        let $this = $(this);
+//        let $tab = $this.find('li.active');
+//        let $link = $tab.find('a');
+//        let $panel = $($link.attr('href'));
+//
+//        $this.on('click','.tab-control',function (e) {
+//            e.preventDefault();
+//            let $link = $(this);
+//            let id = this.hash;
+//
+//            if(id && !$link.is('.active')){
+//                $panel.removeClass('active');
+//                $tab.removeClass('active');
+//
+//                $panel = $(id).addClass('active');
+//                $tab = $link.parent().addClass('active');
+//            }
+//        })
+//    })
+
+    $(function () {
+        $('li').each(function () {
+            let $this = $(this);
+            let $link = $this.find('a');
+            let id = $link.attr('href');
+            $this.click(function (e) {
+                e.preventDefault();
+                if(id && !$link.is('.active')){
+                    $(id).siblings().css('display','none');
+                    $this.siblings().removeClass('active');
+                    $(id).css('display','block');
+                    $this.addClass('active');
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>
